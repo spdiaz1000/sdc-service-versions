@@ -4,17 +4,17 @@ This repository tracks which versions of the Survey Data Collection (SDC) platfo
 ## Cloud Foundry Spaces
 This repository contains Git branches corresponding to the Cloud Foundry spaces (environments) below:
 
-| Branch/Space                                                         | Purpose                     |
-| :------------------------------------------------------------------- | :-------------------------- |
-| cat                                                                  | Customer Acceptance Testing |
-| ci                                                                   | Continuous Integration      |
-| demo                                                                 | Demonstations               |
-| dev                                                                  | Development                 |
-| [int](https://github.com/ONSdigital/sdc-service-versions/tree/int)   | Integration                 |
-| preprod                                                              | Pre-Production              |
-| prod                                                                 | Production                  |
-| sit                                                                  | System Integration Testing  |
-| [test](https://github.com/ONSdigital/sdc-service-versions/tree/test) | Functional Testing          |
+| Branch/Space                                                               | Purpose                     |
+| :------------------------------------------------------------------------- | :-------------------------- |
+| [cat](https://github.com/ONSdigital/sdc-service-versions/tree/cat)         | Customer Acceptance Testing |
+| [ci](https://github.com/ONSdigital/sdc-service-versions/tree/ci)           | Continuous Integration      |
+| [demo](https://github.com/ONSdigital/sdc-service-versions/tree/demo)       | Demonstations               |
+| [dev](https://github.com/ONSdigital/sdc-service-versions/tree/dev)         | Development                 |
+| [int](https://github.com/ONSdigital/sdc-service-versions/tree/int)         | Integration                 |
+| [preprod](https://github.com/ONSdigital/sdc-service-versions/tree/preprod) | Pre-Production              |
+| [prod](https://github.com/ONSdigital/sdc-service-versions/tree/prod)       | Production                  |
+| [sit](https://github.com/ONSdigital/sdc-service-versions/tree/sit)         | System Integration Testing  |
+| [test](https://github.com/ONSdigital/sdc-service-versions/tree/test)       | Functional Testing          |
 
 The **services** directory within each branch contains a text file per deployed microservice that contains the version number of the microservice deployed within that space.
 
