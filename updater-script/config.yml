@@ -1,0 +1,28 @@
+---
+environments:
+  - cat
+  - ci
+  - demo
+  - dev
+  - int
+  - preprod
+  - prod
+  - sit
+  - test
+
+hosts:
+  development: apps.devtest.onsclofo.uk
+  production: apps.prod.cf5.onsclofo.uk
+
+services:
+  actionsvc: actionsvc
+  actionexportersvc: actionexportersvc
+  casesvc: casesvc
+  collectionexercisesvc: collectionexercisesvc
+  collectioninstrumentsvc: ras-collection-instrument
+  notifygatewaysvc: notifygatewaysvc
+  partysvc: ras-party-service
+  samplesvc: samplesvc
+  sdxgatewaysvc: sdxgatewaysvc
+  securemessagesvc: ras-secure-messaging
+  surveysvc: surveysvc
