@@ -15,8 +15,8 @@ hosts:
   production: apps.prod.cf5.onsclofo.uk
 
 services:
-  actionsvc: actionsvc
   actionexportersvc: actionexportersvc
+  actionsvc: actionsvc
   casesvc: casesvc
   collectionexercisesvc: collectionexercisesvc
   collectioninstrumentsvc: ras-collection-instrument
