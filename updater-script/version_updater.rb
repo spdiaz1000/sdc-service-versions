@@ -35,8 +35,12 @@ class VersionUpdater
   end
 
   def service_version(info_url)
-    RestClient.get(info_url) do |response, _request, _result, &_block|
-      return JSON.parse(response)['version'] unless response.code == 404
+    begin
+      RestClient.get(info_url) do |response, _request, _result, &_block|
+        return JSON.parse(response)['version'] unless response.code == 404
+      end
+    rescue RestClient::Exceptions::OpenTimeout
+      @logger.error "Timed out connecting to #{info_url}"
     end
 
     'N/A'
