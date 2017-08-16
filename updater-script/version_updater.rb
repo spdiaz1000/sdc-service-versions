@@ -20,17 +20,6 @@ class VersionUpdater < Thor
 
   desc 'all', 'Display all deployed service versions'
   def all
-    display_all
-  end
-
-  desc 'diff', 'Display only deployed service versions that differ from those in the sdc-service-versions Git repo'
-  def diff
-    display_diffs
-  end
-
-  private
-
-  def display_all
     @config['environments'].each do |environment|
       @config['services'].each do |service, app_name|
         host     = host_for_environment(environment)
@@ -41,7 +30,8 @@ class VersionUpdater < Thor
     end
   end
 
-  def display_diffs
+  desc 'diff', 'Display only deployed service versions that differ from those in the sdc-service-versions Git repo'
+  def diff
     github_repo = @config['sdc-versions-repo-url']
     @config['environments'].each do |environment|
       @config['services'].each do |service, app_name|
@@ -55,6 +45,8 @@ class VersionUpdater < Thor
       end
     end
   end
+
+  private
 
   def host_for_environment(environment)
     environment.include?('prod') ? @config['hosts']['production'] : @config['hosts']['development']
