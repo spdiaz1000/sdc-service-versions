@@ -18,5 +18,9 @@ This repository contains Git branches corresponding to the Cloud Foundry spaces 
 
 The **services** directory within each branch contains a text file per deployed microservice that contains the version number of the microservice deployed within that space.
 
+The **releases** directory within every branch contains a CSV file that contains the version number of each microservice comprising a release.
+
+The **release-notes** directory within every branch contains an aggregated release note for every release.
+
 ## Copyright
 Copyright (C) 2017 Crown Copyright (Office for National Statistics)
