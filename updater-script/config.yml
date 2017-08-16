@@ -20,6 +20,7 @@ services:
   casesvc: casesvc
   collectionexercisesvc: collectionexercisesvc
   collectioninstrumentsvc: ras-collection-instrument
+  iacsvc: iacsvc
   notifygatewaysvc: notifygatewaysvc
   partysvc: ras-party-service
   samplesvc: samplesvc
