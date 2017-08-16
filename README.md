@@ -1,5 +1,5 @@
-# SDC Microservice Versions
-This repository tracks which versions of the Survey Data Collection (SDC) platform microservices are deployed to which environment, loosely following the approach detailed in [_Versioning a Microservice System with git_](https://opencredo.com/versioning-a-microservice-system-with-git/).
+# SDC Microservice Versions and Releases
+This repository tracks which versions of the Survey Data Collection (SDC) platform microservices are deployed to which environment, loosely following the approach detailed in [_Versioning a Microservice System with git_](https://opencredo.com/versioning-a-microservice-system-with-git/). It also tracks releases and release notes.
 
 ## Cloud Foundry Spaces
 This repository contains Git branches corresponding to the Cloud Foundry spaces (environments) below:
