@@ -46,16 +46,16 @@ class VersionUpdater < Thor
         host       = host_for_environment(environment)
         protocol   = protocol_for_environment(environment)
         info_url   = "#{protocol}://#{app_name}-#{environment}.#{host}/info"
-        method.call(environment, service, info_url, github_url)
+        method.call(environment, service, info_url, github_url, github_repo)
       end
     end
   end
 
-  def output_service_version(environment, service, info_url, _github_url)
+  def output_service_version(environment, service, info_url, _github_url, _github_repo)
     puts "#{environment}/#{service} has version #{service_version(info_url)}"
   end
 
-  def output_service_version_diff(environment, service, info_url, github_url)
+  def output_service_version_diff(environment, service, info_url, github_url, github_repo)
     github_url      = "#{github_repo}/#{environment}/services/#{service}.version"
     github_version  = github_service_version(github_url)
     service_version = service_version(info_url)
