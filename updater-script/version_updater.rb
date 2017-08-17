@@ -20,30 +20,12 @@ class VersionUpdater < Thor
 
   desc 'all', 'Display all deployed service versions'
   def all
-    @config['environments'].each do |environment|
-      @config['services'].each do |service, app_name|
-        host     = host_for_environment(environment)
-        protocol = protocol_for_environment(environment)
-        info_url = "#{protocol}://#{app_name}-#{environment}.#{host}/info"
-        puts "#{environment}/#{service} has version #{service_version(info_url)}"
-      end
-    end
+    for_each_service_and_environment(method(:output_service_version))
   end
 
   desc 'diff', 'Display only deployed service versions that differ from those in the sdc-service-versions Git repo'
   def diff
-    github_repo = @config['sdc-versions-repo-url']
-    @config['environments'].each do |environment|
-      @config['services'].each do |service, app_name|
-        github_url      = "#{github_repo}/#{environment}/services/#{service}.version"
-        github_version  = github_service_version(github_url)
-        host            = host_for_environment(environment)
-        protocol        = protocol_for_environment(environment)
-        info_url        = "#{protocol}://#{app_name}-#{environment}.#{host}/info"
-        service_version = service_version(info_url)
-        puts "#{environment}/#{service} has version #{service_version} and GitHub version #{github_version}" if github_version != service_version
-      end
-    end
+    for_each_service_and_environment(method(:output_service_version_diff))
   end
 
   private
@@ -54,6 +36,30 @@ class VersionUpdater < Thor
 
   def protocol_for_environment(environment)
     environment.include?('prod') ? 'https' : 'http'
+  end
+
+  def for_each_service_and_environment(method)
+    github_repo = @config['sdc-versions-repo-url']
+    @config['environments'].each do |environment|
+      @config['services'].each do |service, app_name|
+        github_url = "#{github_repo}/#{environment}/services/#{service}.version"
+        host       = host_for_environment(environment)
+        protocol   = protocol_for_environment(environment)
+        info_url   = "#{protocol}://#{app_name}-#{environment}.#{host}/info"
+        method.call(environment, service, info_url, github_url)
+      end
+    end
+  end
+
+  def output_service_version(environment, service, info_url, _github_url)
+    puts "#{environment}/#{service} has version #{service_version(info_url)}"
+  end
+
+  def output_service_version_diff(environment, service, info_url, github_url)
+    github_url      = "#{github_repo}/#{environment}/services/#{service}.version"
+    github_version  = github_service_version(github_url)
+    service_version = service_version(info_url)
+    puts "#{environment}/#{service} has version #{service_version} and GitHub version #{github_version}" if github_version != service_version
   end
 
   def github_service_version(github_url)
