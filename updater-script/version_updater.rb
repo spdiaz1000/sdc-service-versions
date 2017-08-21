@@ -58,9 +58,9 @@ class VersionUpdater < Thor
 
   def output_service_version_diff(environment, service, info_url, github_url, github_repo)
     github_url      = "#{github_repo}/#{environment}/services/#{service}.version"
-    github_version  = github_service_version(github_url)
-    service_version = service_version(info_url)
-    puts "#{environment}/#{service} has version #{service_version[0]} and GitHub version #{github_version}" if github_version != service_version[0]
+    github_version  = github_service_version(github_url).split(',').first
+    service_version = service_version(info_url).first
+    puts "#{environment}/#{service} has version #{service_version} and GitHub version #{github_version}" if github_version != service_version
   end
 
   def github_service_version(github_url)
