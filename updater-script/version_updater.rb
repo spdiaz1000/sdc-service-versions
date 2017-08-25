@@ -52,33 +52,36 @@ class VersionUpdater < Thor
   end
 
   def output_service_version(environment, service, info_url, _github_url, _github_repo)
-    puts "#{environment}/#{service} has version #{service_version(info_url)}"
+    version = service_version(info_url)
+    puts "#{environment}/#{service} has version #{version[0]}, commit #{version[1]}"
   end
 
   def output_service_version_diff(environment, service, info_url, github_url, github_repo)
     github_url      = "#{github_repo}/#{environment}/services/#{service}.version"
     github_version  = github_service_version(github_url)
     service_version = service_version(info_url)
-    puts "#{environment}/#{service} has version #{service_version} and GitHub version #{github_version}" if github_version != service_version
+    puts "#{environment}/#{service} has version #{service_version[0]}, commit #{service_version[1]} and GitHub version #{github_version[0]}, commit #{github_version[1]}" if github_version != service_version
   end
 
   def github_service_version(github_url)
     doc = Nokogiri::HTML(open(github_url))
-    doc.xpath('//body').text if doc
+    doc.xpath('//body').text.split(',') if doc
   rescue OpenURI::HTTPError
-    'N/A'
+    ['N/A', 'N/A']
   end
 
   def service_version(info_url)
     begin
       RestClient.get(info_url) do |response, _request, _result, &_block|
-        return JSON.parse(response)['version'] unless response.code == 404
+        unless response.code == 404
+          return JSON.parse(response)['version'], JSON.parse(response)['commit'][0, 7]
+        end
       end
     rescue RestClient::Exceptions::OpenTimeout
       STDERR.puts "Timed out connecting to #{info_url}"
     end
 
-    'N/A'
+    ['N/A', 'N/A']
   end
 end
 
