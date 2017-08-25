@@ -58,16 +58,16 @@ class VersionUpdater < Thor
 
   def output_service_version_diff(environment, service, info_url, github_url, github_repo)
     github_url      = "#{github_repo}/#{environment}/services/#{service}.version"
-    github_version  = github_service_version(github_url).split(',').first
-    service_version = service_version(info_url).first
-    puts "#{environment}/#{service} has version #{service_version} and GitHub version #{github_version}" if github_version != service_version
+    github_version  = github_service_version(github_url)
+    service_version = service_version(info_url)
+    puts "#{environment}/#{service} has version #{service_version[0]}, commit #{service_version[1]} and GitHub version #{github_version[0]}, commit #{github_version[1]}" if github_version != service_version
   end
 
   def github_service_version(github_url)
     doc = Nokogiri::HTML(open(github_url))
-    doc.xpath('//body').text if doc
+    doc.xpath('//body').text.split(',') if doc
   rescue OpenURI::HTTPError
-    'N/A'
+    ['N/A', 'N/A']
   end
 
   def service_version(info_url)
