@@ -1,0 +1,13 @@
+service,version
+actionexporterservice,10.45.0
+actionsvc,10.45.1
+casesvc,10.45.1
+collectionexercisesvc,10.45.1
+collectioninstrumentsvc,0.1.0
+iacsvc,10.45.0
+notifygatewaysvc,10.45.0
+partysvc,0.1.0
+samplesvc,10.45.1
+sdxgatewaysvc,10.45.0
+securemessagesvc,0.1.0
+surveysvc,10.43.2
