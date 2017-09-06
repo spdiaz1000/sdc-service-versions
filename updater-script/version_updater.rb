@@ -73,7 +73,7 @@ class VersionUpdater < Thor
   def service_version(info_url)
     begin
       RestClient.get(info_url) do |response, _request, _result, &_block|
-        unless response.code == 404
+        unless response.code == 404 || response['version'].nil? || response['commit'].nil?
           return JSON.parse(response)['version'], JSON.parse(response)['commit'][0, 7]
         end
       end
